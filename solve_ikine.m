@@ -1,20 +1,22 @@
-function [th1, th2, th3] = myikine (x, y, z)
+function [vector] = myikine (x, y, z)
     %syms d1 d2;
     d1=25;
     d2=20;
-    syms tth1 tth2 tth3;
+    syms tth0 tth1 tth2;
     
-    lx = d1^2 + d2^2 - 2*d1*d2*cos(pi-tth3);
-    thx= ((pi*d2) / lx)+tth2 ;
+    lx = sqrt(d1^2 + d2^2 - 2*d1*d2*cos(pi-tth2));
+    thx= (((pi-tth2)*d2) / lx)+tth1 ;
     
-    eqn1 = x == sin(thx)*cos(tth1)*lx
-    eqn2 = y == sin(thx)*sin(tth1)*lx
+    eqn1 = x == sin(thx)*lx*cos(tth0);
+    eqn2 = y == sin(thx)*lx*sin(tth0);
     eqn3 = z == cos(thx)*lx
     
-    sol = solve([eqn1, eqn2, eqn3],[tth1, tth2, tth3]);
+    sol = solve([eqn1, eqn2, eqn3],[tth0, tth1, tth2]);
+ 
+    th0 = sol.tth0;
+    th1 = sol.tth1;
+    th2 = sol.tth2;
     
-    th1 = sol.tth1
-    th2 = sol.tth2
-    th3 = sol.tth3
+    vector =[th0, th1, th2];
 
 end
