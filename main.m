@@ -1,16 +1,16 @@
-L1 = Link('d', 25, 'a',   0, 'alpha', (pi/2), 'offset', (pi));
-L2 = Link('d',  0, 'a',  25, 'alpha', 0     , 'offset', (pi/2));
-L3 = Link('d',  0, 'a',  25, 'alpha', 0     );
+L1 = Link('d', 30, 'a',   0, 'alpha', (pi/2), 'offset', (pi));
+L2 = Link('d',  0, 'a',  30, 'alpha', 0     , 'offset', (pi/2));
+L3 = Link('d',  0, 'a',  30, 'alpha', 0     );
 tool = [ 0  0 1  0
         -1  0 0  0
          0 -1 0  0
          0  0 0  1];
      
 CCBot = SerialLink([L1 L2 L3], 'name', 'CC Bot', 'tool', tool)
-pose = solve_ikine(0,-5,50)
+pose = solve_ikine(15,10,65)
 
 CCBot.plot(pose)
-CCBot.fkine(pose)
+%CCBot.fkine([0 ,0,0])
 
 %Q0 =[1 0 0 0
 %     0 1 0 0

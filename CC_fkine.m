@@ -1,32 +1,35 @@
-syms x1;
-syms x2;
-syms x3;
-%syms d1;
-%syms a2;
+function [v]= myfkine(th0,th1,th2) 
+% syms th0; syms th1; syms th2;
+% 
+% syms d0 d1 syms a0 a1 a2
+d0=30;
+d1=30;
+a0=30;
+a1=30;
+a2=30;
 
-%x1=1
-%x2=1
-%x3=1
-d1=25
-a2=20 
+q1=[-cos(th0) sin(th0) 0  0
+    -sin(th0) -cos(th0)  0  0
+    0       0          1 d0
+    0       0          0  1];
 
-q1=[cos(x1) -sin(x1) 0 0
-    sin(x1) cos(x1)  0 0
-    0       0        1 d1
-    0       0        0 1];
+q2=[cos(th1+(pi/2)) -sin(th1+(pi/2)) 0  0
+    0               0               -1  0
+    sin(th1+(pi/2)) cos(th1+(pi/2))  0  0
+    0               0                0  1];
 
-q2=[cos(x2+(pi/2)) -sin(x2+(pi/2))  0  0
-    0              0               -1  0
-    sin(x2+(pi/2)) cos(x2+(pi/2))   0  0
-    0              0                0  1];
+q3=[cos(th2) -sin(th2)  0 a1
+    sin(th2) cos(th2)   0  0
+    0        0          1  0
+    0        0          0 1];
 
-q3=[cos(x3) -sin(x3) 0 a2
-    sin(x3) cos(x3)  0 0
-    0        0       1 0
-    0        0       0 1];
-
-tool=[0 0 1 20
+tool=[0 0 1 a2
      -1 0 0 0
      0 -1 0 0
      0 0 0 1];
- s=q1*q2*q3*tool
+ 
+ s=q1*q2*q3*tool;
+ 
+ t=s(:,4);
+ v=t(1:3,1);
+ 
